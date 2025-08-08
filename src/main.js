@@ -1,5 +1,5 @@
 import { GameCore as Game } from './gameCore.js';
-import { initFullscreen } from './fullscreen.js';
+import { initFullscreen, requestFullscreenIfMobile } from './fullscreen.js';
 import { LEVELS } from './levels.js';
 
 const canvas = document.getElementById('game');
@@ -48,5 +48,9 @@ game.start();
 
 // Inicializar botón de pantalla completa
 initFullscreen(wrapper);
+
+// En móvil, intentar entrar a pantalla completa tras el primer gesto/tap en la página
+document.addEventListener('touchend', () => requestFullscreenIfMobile(wrapper), { once: true, passive: true });
+document.addEventListener('click', () => requestFullscreenIfMobile(wrapper), { once: true, passive: true });
 
 

@@ -70,4 +70,17 @@ export function initFullscreen(wrapperElement) {
   }
 }
 
+export function requestFullscreenIfMobile(wrapperElement) {
+  try {
+    if (!wrapperElement) return;
+    const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    if (!isMobile) return;
+    const isFs = !!(document.fullscreenElement || document.webkitFullscreenElement);
+    const req = wrapperElement.requestFullscreen || wrapperElement.webkitRequestFullscreen || wrapperElement.msRequestFullscreen;
+    if (!isFs && req) req.call(wrapperElement);
+  } catch (_) {
+    // ignorar fallos silenciosamente
+  }
+}
+
 
