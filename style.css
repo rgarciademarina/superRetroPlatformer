@@ -1,0 +1,154 @@
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(1200px 700px at 50% 20%, #1a1f2e 0%, #101420 60%, #0a0d14 100%);
+  color: #e6e6e6;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.game-wrapper {
+  position: relative;
+  width: max-content;
+  height: max-content;
+}
+
+/* Centrado y expansión cuando el contenedor está en modo pantalla completa */
+.game-wrapper:fullscreen,
+.game-wrapper:-webkit-full-screen {
+  display: grid;
+  place-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(1200px 700px at 50% 20%, #1a1f2e 0%, #101420 60%, #0a0d14 100%);
+}
+
+#game {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  background: #1b2233;
+  border: 2px solid #2c3650;
+  box-shadow:
+    0 0 0 2px #0a0d14,
+    0 0 40px rgba(0,0,0,0.6),
+    inset 0 0 40px rgba(0,0,0,0.5);
+}
+
+#hud {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+/* Controles táctiles */
+.touch-controls {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.touch-btn {
+  position: absolute;
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: rgba(20, 26, 40, 0.35);
+  border: 1px solid #2c3650;
+  color: #cfe3ff;
+  font: 18px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  display: grid;
+  place-items: center;
+  pointer-events: auto;
+  user-select: none;
+}
+.touch-btn:active { transform: scale(0.98); }
+.touch-left { right: 116px; bottom: 16px; }
+.touch-right { right: 16px; bottom: 16px; }
+.touch-jump { left: 16px; bottom: 16px; width: 94px; height: 94px; }
+
+@media (hover: hover) and (pointer: fine) {
+  .touch-controls { display: none; }
+}
+
+/* Overlay para introducir iniciales en móvil */
+.initials-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.25);
+  pointer-events: auto;
+  z-index: 20;
+}
+.initials-overlay[hidden] { display: none !important; }
+.initials-box {
+  background: rgba(12, 16, 24, 0.9);
+  border: 1px solid #2c3650;
+  padding: 12px 14px;
+  border-radius: 6px;
+  color: #e6efff;
+  display: grid;
+  gap: 8px;
+  min-width: 220px;
+}
+.initials-box label { font: 14px monospace; }
+.initials-input {
+  font: 20px monospace;
+  padding: 8px 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  width: 100%;
+  background: #0f1524;
+  color: #eef6ff;
+  border: 1px solid #32406a;
+  border-radius: 4px;
+}
+
+.scanlines {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: multiply;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.18) 0px,
+      rgba(0,0,0,0.18) 1px,
+      rgba(0,0,0,0.00) 2px,
+      rgba(0,0,0,0.00) 3px
+    );
+  opacity: 0.75;
+  border-radius: 2px;
+}
+
+/* Botón de pantalla completa */
+.fullscreen-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 5;
+  padding: 6px 8px;
+  font: 12px monospace;
+  color: #cfe3ff;
+  background: rgba(20, 26, 40, 0.6);
+  border: 1px solid #2c3650;
+  border-radius: 4px;
+  cursor: pointer;
+  backdrop-filter: blur(2px);
+}
+.fullscreen-btn:hover { background: rgba(20, 26, 40, 0.8); }
+.fullscreen-btn:active { transform: translateY(1px); }
+
+
+@media (prefers-reduced-motion: no-preference) {
+  .scanlines { animation: flicker 4s infinite linear; }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 0.75; }
+  50% { opacity: 0.65; }
+}
+
+

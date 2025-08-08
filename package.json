@@ -1,0 +1,16 @@
+{
+  "name": "super-retro-platformer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Juego de plataformas retro en JS/Canvas. Proyecto estático.",
+  "scripts": {
+    "start": "http-server -p 5173 -c-1",
+    "start:5174": "http-server -p 5174 -c-1",
+    "start:random": "http-server -p 0 -c-1",
+    "start:open": "http-server -p 5173 -c-1 -o",
+    "dev": "npm run start"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

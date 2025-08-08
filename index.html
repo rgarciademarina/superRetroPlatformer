@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Super Retro Platformer</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="game-wrapper">
+      <canvas id="game" width="320" height="180"></canvas>
+      <div class="scanlines" aria-hidden="true"></div>
+      <canvas id="hud"></canvas>
+      <div id="touch" class="touch-controls" aria-hidden="true">
+        <button class="touch-btn touch-left" data-action="left" aria-label="Izquierda">◀</button>
+        <button class="touch-btn touch-right" data-action="right" aria-label="Derecha">▶</button>
+        <button class="touch-btn touch-jump" data-action="jump" aria-label="Saltar">⤒</button>
+      </div>
+      <div id="initialsOverlay" class="initials-overlay" hidden>
+        <div class="initials-box">
+          <label for="initialsInput">Introduce tus iniciales</label>
+          <input id="initialsInput" class="initials-input" maxlength="3" placeholder="AAA" />
+        </div>
+      </div>
+    </div>
+
+    <noscript>
+      Habilita JavaScript para jugar.
+    </noscript>
+
+    <script type="module" src="src/main.js"></script>
+  </body>
+  </html>
+
+
