@@ -32,6 +32,19 @@ export function initFullscreen(wrapperElement) {
 
     wrapperElement.appendChild(button);
 
+    // En móviles, intentar entrar en fullscreen al iniciar el juego (requiere gesto del usuario).
+    // Aprovechamos el primer toque/click sobre la pantalla o el botón de salto.
+    const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    if (isMobile) {
+      const tryEnter = () => {
+        if (!isFullscreen()) requestFullscreen(wrapperElement);
+        window.removeEventListener('touchstart', tryEnter);
+        window.removeEventListener('click', tryEnter);
+      };
+      window.addEventListener('touchstart', tryEnter, { passive: true, once: true });
+      window.addEventListener('click', tryEnter, { passive: true, once: true });
+    }
+
     function isFullscreen() {
       return !!(document.fullscreenElement || document.webkitFullscreenElement);
     }
