@@ -26,11 +26,19 @@ jobs:
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
+        with:
+          enablement: true
+
+      - name: Build static site
+        run: |
+          mkdir -p dist
+          cp index.html style.css dist/
+          cp -r src dist/src
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: ./dist
 
       - name: Deploy to GitHub Pages
         id: deployment
